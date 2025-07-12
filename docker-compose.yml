@@ -3,10 +3,10 @@ services:
     image: postgres:latest
     volumes:
       - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+    env_file:
+      - .env
+    networks:
+      - mynetwork
       
 networks:
   mynetwork:
