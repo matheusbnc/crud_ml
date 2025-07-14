@@ -15,3 +15,9 @@ def create_product(db: Session, product: ProductCreate):
     db.refresh(db_product)
     return db_product
 
+def delete_product(db: Session, product_id: int):
+    db_product = db.query(ProductModel).filter(ProductModel.id == product_id).first()
+    db.delete(db_product)
+    db.commit()
+    return db_product
+
