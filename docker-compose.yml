@@ -3,21 +3,29 @@ services:
     image: postgres:latest
     volumes:
       - pgdata:/var/lib/postgresql/data
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: meubanco
     networks:
       - mynetwork
-  
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
       - ./backend:/app
-    env_file:
-      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/meubanco
     depends_on:
-      - db
+      postgres:
+        condition: service_healthy
     networks:
       - mynetwork
     ports:
