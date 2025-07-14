@@ -71,10 +71,11 @@ def delete_product(product_id):
 # 🧠 App principal
 def main():
     st.set_page_config(page_title="CRUD de Produtos", layout="wide")
-
+    st.title("Gerenciamento de Produtos") 
+    
     with st.sidebar:
         choice = option_menu(
-            menu_title=None,
+            menu_title="Menu de Navegação",
             options=["Listar Produtos", "Criar Produto", "Editar Produto", "Deletar Produto"],
             icons=["list-task", "plus", "pencil-square", "trash"],
             default_index=0,
