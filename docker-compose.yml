@@ -53,4 +53,4 @@ networks:
   mynetwork:
 
 volumes:
-  pg
+  pgdata:
