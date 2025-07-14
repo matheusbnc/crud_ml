@@ -7,8 +7,8 @@ WORKDIR /app
 # Copia arquivos do frontend para dentro do container
 COPY . /app
 
-# Instala dependências (ajuste se precisar de mais libs)
-RUN pip install --no-cache-dir streamlit requests pandas
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Expõe a porta padrão do Streamlit
 EXPOSE 8501
