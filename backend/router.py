@@ -18,13 +18,19 @@ def read_all_products(db: Session = Depends(get_db)):
     products = get_product(db)
     return products
 
-@router.get("/product{product_id}", response_model=ProductResponse)
+@router.get("/product/{product_id}", response_model=ProductResponse)
 def read_one_product(product_id: int, db: Session = Depends(get_db)):
-    product = get_product(db, product_id=product_id)
+    product = get_product(product_id=product_id, db=db)
     if product is None:
         raise HTTPException(status_code=404, detail="Produto Inexistente")
 
 @router.post("/products/", response_model=ProductResponse)
 def create_product(product: ProductCreate, db: Session = Depends(get_db)):
-    return create_product(product, db)
+    return create_product(product, db=db)
+
+@router.delete("/products/{product_id}", response_model=ProductResponse)
+def delete_product(product_id: int, db: Session = Depends(get_db)):
+    product = delete_product(product_id=product_id, db=db)
+    if product is None:
+        raise HTTPException(status_code=404, detail="Produto Inexistente")
 
