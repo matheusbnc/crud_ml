@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import os
+import pandas as pd
 
 API_URL = os.getenv("API_URL", "http://localhost:8000") 
 
@@ -33,8 +34,10 @@ def main():
     if choice == "Listar Produtos":
         products = list_products()
         if products:
-            for p in products:
-                st.write(f"ID: {p['id']} - Nome: {p['name']} - Preço: {p['price']}")
+            df = pd.DataFrame(products)
+            df = df[["id", "name", "description", "price", "category", "supplier_email"]]
+            df = df.reset_index(drop=True)
+            st.dataframe(df, hide_index=True)
         else:
             st.write("Nenhum produto encontrado.")
 
