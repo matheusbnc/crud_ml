@@ -15,17 +15,17 @@ Este projeto demonstra a criação de uma aplicação CRUD simples integrando **
 ```
 crud_ml/
 ├── backend/
-│   ├── main.py           # Entry point da API FastAPI
-│   ├── database.py       # Conexão com o banco de dados
-│   ├── models.py         # Modelos SQLAlchemy
-│   └── schemas.py        # Schemas Pydantic
+│   ├── main.py             # Entry point da API FastAPI
+│   ├── database.py         # Conexão com o banco de dados
+│   ├── models.py           # Modelos SQLAlchemy
+│   ├── schemas.py          # Schemas Pydantic
+│   └── Dockerfile          # Dockerfile do backend
 ├── frontend/
-│   └── app.py            # Interface em Streamlit
-├── docker-compose.yml    # Orquestração dos serviços
-├── Dockerfile-backend    # Dockerfile para o backend
-├── Dockerfile-frontend   # Dockerfile para o frontend
-├── requirements.txt      # Dependências Python
-└── README.md             # Documentação do projeto
+│   ├── app.py              # Interface em Streamlit
+│   └── Dockerfile          # Dockerfile do frontend
+├── docker-compose.yml      # Orquestração dos serviços
+├── requirements.txt        # Dependências Python
+└── README.md               # Documentação do projeto
 ```
 
 ## 🚀 Como Executar Localmente
