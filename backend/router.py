@@ -33,4 +33,11 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     product = delete_product(product_id=product_id, db=db)
     if product is None:
         raise HTTPException(status_code=404, detail="Produto Inexistente")
+    return product
 
+@router.put("/products/{product_id}", response_model=ProductResponse)
+def atualizar_product(product_id: int, product: ProductUpdate, db: Session = Depends(get_db)):
+    product = update_product(product_id=product_id, product=product, db=db)
+    if product is None:
+        raise HTTPException(status_code=404, detail="Produto Inexistente")
+    return product
