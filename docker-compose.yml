@@ -1,12 +1,20 @@
+# docker-compose.yml para orquestrar os serviços do projeto.
+# Este arquivo define os serviços: backend, frontend e banco de dados PostgreSQL.
+
+version: "3.9"
+
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:15
+    container_name: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: meubanco
+    ports:
+      - "5432:5432"
     networks:
       - mynetwork
     healthcheck:
@@ -19,10 +27,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    container_name: backend
     volumes:
       - ./backend:/app
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/meubanco
+      - DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres:5432/meubanco
     depends_on:
       postgres:
         condition: service_healthy
@@ -35,6 +44,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    container_name: frontend
     volumes:
       - ./frontend:/app
     environment:
@@ -53,4 +63,5 @@ networks:
   mynetwork:
 
 volumes:
-  pgdata:
+  postgres_data:
+    # Volume nomeado para persistir dados do banco de dados

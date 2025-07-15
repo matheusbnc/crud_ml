@@ -1,17 +1,22 @@
-# Use imagem oficial Python slim para frontend Streamlit
+# Dockerfile para o frontend Streamlit.
+# Este arquivo define a imagem Docker para rodar o frontend Python com Streamlit.
+
 FROM python:3.11-slim
 
-# Define o diretório da aplicação
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia arquivos do frontend para dentro do container
-COPY . /app
+# Copia os arquivos de dependências
+COPY requirements.txt .
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+# Instala as dependências do projeto
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante do código-fonte para o container
+COPY . .
 
 # Expõe a porta padrão do Streamlit
 EXPOSE 8501
 
-# Comando para rodar o app Streamlit no container
+# Comando para iniciar o Streamlit
 CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]

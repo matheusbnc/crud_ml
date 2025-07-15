@@ -1,3 +1,5 @@
+"""Configuração do banco de dados e sessão SQLAlchemy."""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -20,6 +22,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 def get_db():
+    """Gera uma sessão de banco de dados.
+
+    Yields:
+        Session: Sessão do banco de dados.
+    """
     db = SessionLocal()
     try:
         yield db
