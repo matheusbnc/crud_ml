@@ -2,6 +2,8 @@
 
 Este projeto demonstra a criação de uma aplicação CRUD simples integrando **Streamlit** (frontend), **FastAPI** (backend) e **PostgreSQL** (banco de dados relacional), ideal para fins de aprendizado e portfólio. O objetivo é ilustrar como construir uma aplicação fullstack leve com foco em organização de código, comunicação entre serviços e persistência de dados.
 
+![Preview da aplicação](./assets/preview.png)
+
 ## 🧩 Tecnologias Utilizadas
 
 - [FastAPI](https://fastapi.tiangolo.com/) — API backend rápida e moderna  
